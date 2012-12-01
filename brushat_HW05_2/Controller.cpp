@@ -128,6 +128,7 @@ int main(int argc, char** argv) {
 
   //pair<int,int> p = testSpeedTSP(SB, 60, true);
 
-  system("pause");
+  system("PAUSE"); // how to keep console open: http://www.cplusplus.com/forum/beginner/1988/  
+
   return 0;
 }

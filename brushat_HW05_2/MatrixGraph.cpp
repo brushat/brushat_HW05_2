@@ -9,11 +9,32 @@
 #include "MatrixGraph.h"
 
 MatrixGraph::MatrixGraph(unsigned num_nodes){
+	// http://au.answers.yahoo.com/question/index?qid=20081125114819AA8swQ5
 	// Read number of vertices and number of edges
 	num_edges = 0;
-	// create m*m vector matrix full of zeroes (AKA 'M')
+	// create m*n vector matrix full of zeroes (AKA 'M')
+	M.resize(num_nodes);
+	// it's a vector of vectors so...
 	// loop through num nodes
-	//
+	for(int m = 0; m < M.size(); m++){
+		// for each node loop through num nodes again and put a 0 at [m][n]
+		for(int n = 0; n < M.size(); n++){
+			M.at(m).push_back(0);
+		}
+		// results in...
+		// 0 0 0 0 0
+		// 0 0 0 0 0
+		// 0 0 0 0 0
+		// 0 0 0 0 0
+		// 0 0 0 0 0
+		// rows and columns are determined by the number of nodes
+		// since edges go both directions
+		// "x is A from y" also means "y is A from x"
+	}
+	// edgeList.resize(num_nodes)
+	
+
+	
 }
 
 MatrixGraph::~MatrixGraph(){

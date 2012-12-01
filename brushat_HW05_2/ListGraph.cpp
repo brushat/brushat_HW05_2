@@ -18,14 +18,14 @@ ListGraph::ListGraph(int numNodes){
 	
 	// Needed some help on how a listgraph actual works
 	// http://www.phys.psu.edu/~ralbert/phys597_09-fall/c07_graph_soft_handout.pdf
-	// Also talked to Bo
+	// Also talked to Bo to make sure I was on the right track
 	for(int i = 0; i < numNodes; i++){
 		edgeList.push_back(EList(NULL));
 	}
 }
 
 ListGraph::~ListGraph(){
-	// Didn't create it with 'new' so we don't need to put anything here
+	// Didn't create it with 'new' so we shouldn't put anything here
 }
 
 void ListGraph::addEdge(NodeID u, NodeID v, EdgeWeight weight){
@@ -35,25 +35,29 @@ void ListGraph::addEdge(NodeID u, NodeID v, EdgeWeight weight){
 		bool duplicate = false;
 		// Check: we are passing in a weight > 0
 		if(weight > 0){
-				// This code is from the lecture that we went over ListGraph implementation
-				EList::const_iterator it;
-				for(it = edgeList[u].begin(); it != edgeList[u].end(); it++){
-					NWPair tPair = (*it);
-					if(tPair.first == v && tPair.second == weight){
-						duplicate = true;
-					}
-				
-					// End code from Bo's Lecture
-				if(duplicate == false){
-					NWPair NWv = NWPair(v,weight);
-					NWPair NWu = NWPair(u,weight);
-					// The list is still non-directional so...
-					// "u is 100 from v" also means "v is 100 from u"
-					edgeList[u].push_back(NWv);
-					edgeList[v].push_back(NWu);
-					num_edges++;
+			// This code is from the lecture that we went over ListGraph implementation
+			EList::const_iterator it;
+			// for each node in u's node list...
+			for(it = edgeList[u].begin(); it != edgeList[u].end(); it++){
+				// get the nw pair
+				NWPair tPair = (*it);
+				if(tPair.first == v){ // not entirely sure that I need to check the weight also
+					// if the nw pair is equal to the edge and node we are trying to add then it is a duplicate
+					duplicate = true;
 				}
-				}
+			}	
+			// End code from Bo's Lecture
+			// if it's not a duplicate in the list then add it to the list (for both nodes)
+			if(duplicate == false){
+				NWPair NWv = NWPair(v,weight);
+				NWPair NWu = NWPair(u,weight);
+				// The list is still non-directional so...
+				// "u is 100 from v" also means "v is 100 from u"
+				edgeList[u].push_back(NWv);
+				edgeList[v].push_back(NWu);
+				num_edges++;
+			}
+			
 		}
 	}
 }

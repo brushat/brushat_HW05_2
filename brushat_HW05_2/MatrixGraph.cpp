@@ -8,6 +8,10 @@
 
 #include "MatrixGraph.h"
 
+/**
+* Create the the MatrixGraph structure based on the number of nodes in the graph
+* 
+*/
 MatrixGraph::MatrixGraph(unsigned num_nodes){
 	// Got some help here: http://au.answers.yahoo.com/question/index?qid=20081125114819AA8swQ5
 	// Read number of vertices and number of edges
@@ -32,11 +36,12 @@ MatrixGraph::MatrixGraph(unsigned num_nodes){
 		
 	}
 	// edgeList.resize(num_nodes)
-	
-
-	
 }
 
+/**
+* Deletes the MatrixGraph structure
+* 
+*/
 MatrixGraph::~MatrixGraph(){
 	// Do mothiing here, M was not created with 'new' so it should not be deleted
 }

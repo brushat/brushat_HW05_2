@@ -41,17 +41,19 @@ void ListGraph::addEdge(NodeID u, NodeID v, EdgeWeight weight){
 			for(it = edgeList[u].begin(); it != edgeList[u].end(); it++){
 				// get the nw pair
 				NWPair tPair = (*it);
-				if(tPair.first == v){ // not entirely sure that I need to check the weight also
+				if(tPair.first == v){ // not entirely sure that I need to check the weight also, I don't think I do
 					// if the nw pair is equal to the edge and node we are trying to add then it is a duplicate
+					// End code from Bo's Lecture
 					duplicate = true;
 				}
 			}	
-			// End code from Bo's Lecture
+
+			// EDIT: This section needs to go outside the for loop
 			// if it's not a duplicate in the list then add it to the list (for both nodes)
 			if(duplicate == false){
 				NWPair NWv = NWPair(v,weight);
 				NWPair NWu = NWPair(u,weight);
-				// The list is still non-directional so...
+				// The graph is still non-directional so...
 				// "u is 100 from v" also means "v is 100 from u"
 				edgeList[u].push_back(NWv);
 				edgeList[v].push_back(NWu);
@@ -81,19 +83,34 @@ EdgeWeight ListGraph::weight(NodeID u, NodeID v) const{
 * Credit to Dr. Brinkman for some of this code which he gave out in lecture
 */
 std::list<NWPair> ListGraph::getAdj(NodeID u) const{
-	std::list<NWPair> ret;
-	
-	return ret;
+	if(0 <= u < edgeList.size()){
+		// From ListGraph.cpp lecture notes
+		std::list<NWPair> ret = edgeList[u];
+		return ret;
+	}
 }
 
+/**
+* Returns the number of adjacent nodes (the degree) of the node u
+* 
+*/
 unsigned ListGraph::degree(NodeID u) const{
-	return 0;
+	return getAdj(u).size();
 }
 
+/**
+* Returns the size of the graph
+* 
+*/
 unsigned ListGraph::size() const{
-	return edgeList.size();
+	int size = edgeList.size();
+	return size;
 }
 
+/**
+* Returns the number of edges in the graph
+* An edge is only an edge if the weight is greater than 0
+*/
 unsigned ListGraph::numEdges() const{
 	return num_edges;
 }

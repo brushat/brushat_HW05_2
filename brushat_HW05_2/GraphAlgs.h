@@ -20,4 +20,13 @@
  *     Every pair of nodes u,v  (u != v) has an edge connecting the of weight > 0.
  */
 
+ /* Return value: Return a pair, with the first element being a vector of length n listing the 
+ *  order of the nodes in the cycle (do NOT list the start node twice), and the second element
+ *  being the length of that path (do NOT forget to include the edge from the last node back to
+ *  the start node in the total length.
+ */
 std::pair<std::vector<NodeID>, EdgeWeight> TSP(Graph* G);
+
+void tour(int* arr, int n, int start); // must be non destructive
+
+//void swap(int* start, int* n);

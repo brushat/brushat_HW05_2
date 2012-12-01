@@ -48,6 +48,13 @@ void deleteStarbucksGraph(Graph* G, bool use_matrix) {
     delete (ListGraph*)G;
 }
 
+/*
+void swap(int* start, int* i){
+	int* temp = start;
+	start = i;
+	i = temp;
+}
+*/
 
   /********************************
    * The following section is commented out so you can test your graph code
@@ -98,7 +105,11 @@ void deleteStarbucksGraph(Graph* G, bool use_matrix) {
 
 int main(int argc, char** argv) {
   int n = 5;
-  cout << "HI" << endl;
+  int x = 7;
+  int y = 10;
+  cout << x << endl;
+  swap(x,y);
+  cout << x << endl;
   srand(1);
 
   // Apply each of the Tester methods to your MatrixGraph class.

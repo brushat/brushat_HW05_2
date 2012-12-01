@@ -13,7 +13,8 @@
 * 
 */
 ListGraph::ListGraph(int numNodes){
-	edgeList.resize(numNodes);
+	// Don't need to resize if we are using push_back
+	// edgeList.resize(numNodes);
 	num_edges = 0;
 	
 	// Needed some help on how a listgraph actual works

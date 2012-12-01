@@ -57,7 +57,7 @@ void MatrixGraph::addEdge(NodeID u, NodeID v, EdgeWeight weight){
 				if((M.at(u).at(v) == 0) && (M.at(v).at(u) == 0)){
 					// since edges go both directions in our problem
 					// "x is 100 from y" also means "y is 100 from x"
-					M.at(u).at(v) = weight; // Credit to Scott Vincent for showing me how to access M[u][v]
+					M.at(u).at(v) = weight; // Credit to Scott Vincent for showing me how to access M[u][v] for vector<vector>
 					M.at(v).at(u) = weight;
 					num_edges++;
 				}
@@ -67,30 +67,66 @@ void MatrixGraph::addEdge(NodeID u, NodeID v, EdgeWeight weight){
 
 }
 
+/**
+* Returns the weight of the edge between u and v
+* It could be 0 if there is not edge between u and v
+*/
 EdgeWeight MatrixGraph::weight(NodeID u, NodeID v) const{
+	if((0 <= u < M.size()) && (0 <= v < M.size())){
+		// Return the weight at the intersection of u and v in the matrix
+		return M.at(u).at(v);
+	}
 	return 0;
 }
 
 /**
-* Returns a list of all of the adjacent nodes/edgeweights to the node u
+* Returns a list of all of the adjacent node/edgeweight pairs to the node u
 * Credit to Dr. Brinkman for some of this code which he gave out in lecture
+* also got some help via email
 */
 std::list<NWPair> MatrixGraph::getAdj(NodeID u) const{
 	if(0 <= u < M.size()){
+
 		std::list<NWPair> ret;
+		// This part is from Bo's lecture
+		for(int m = 0; m < M.at(u).size(); m++){
+			// new NodeID/EdgeWeight pair
+			NWPair tPair = NWPair(m, M.at(u).at(m));
+			// if the second value in the pair is 0 then we don't need it
+			if(tPair.second == 0){
+				// if it's 0 that means these nodes don't share an edge = they are NOT adjacent
+			}
+			else ret.push_back(tPair);
+		}
 		return ret;
 	}
 	
 }
 
+/**
+* Returns the number of adjacent nodes (the degree) of the node u
+* 
+*/
 unsigned MatrixGraph::degree(NodeID u) const{
-	return 0;
+	if(0 <= u < M.size()){
+		// go to the vector at u and get the size of the adjacency list... the size is the number of adjacent nodes
+		return getAdj(u).size();
+	}
+	else return 0;
 }
 
+/**
+* Returns the size of the graph
+* 
+*/
 unsigned MatrixGraph::size() const{
 	return M.size();
 }
 
+/**
+* Returns the number of edges in the graph
+* An edge is only an edge if the weight is greater than 0
+*/
 unsigned MatrixGraph::numEdges() const{
 	return num_edges;
 }

@@ -105,11 +105,13 @@ void swap(int* start, int* i){
 
 int main(int argc, char** argv) {
   int n = 5;
+  /*
   int x = 7;
   int y = 10;
   cout << x << endl;
   swap(x,y);
   cout << x << endl;
+  */
   srand(1);
 
   // Apply each of the Tester methods to your MatrixGraph class.
